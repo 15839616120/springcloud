@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--父pom-->
+    <modelVersion>4.0.0</modelVersion>
+    <modules>
+        <module>order</module>
+        <module>stock</module>
+        <module>stock-nacos</module>
+        <module>order-nacos</module>
+    </modules>
+    <!--springboot的版本管理器，点击artifactId进去，里面有一个 <artifactId>spring-boot-dependencies</artifactId>，
+    这里面管理了我们的版本-->
+    <!--这里的可以移到了<dependencyManagement>中，子模块显示声明即可
+    声明方式如下：
+     <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+        </dependency>
+    -->
+   <!-- <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.11.RELEASE</version>
+    </parent>-->
+
+    <!--springcloud alibaba 官方脚手架地址  https://start.aliyun.com/bootstrap.html-->
+
+    <packaging>pom</packaging>
+
+    <groupId>org.example</groupId>
+    <artifactId>tulingcloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-cloud-alibaba-version>2.2.5.RELEASE</spring-cloud-alibaba-version>
+        <spring-boot-starter-version>2.3.11.RELEASE</spring-boot-starter-version>
+        <spring-cloud-version>Hoxton.SR8</spring-cloud-version>
+
+    </properties>
+
+<!--如果在父pomp中用<dependencies>标签，子工程直接就继承了，不用再声明了，子的依赖中就有-->
+<dependencies>
+    <!--springboot 基本场景启动-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+</dependencies>
+
+
+<!--如果在父pomp中用<dependencyManagement>标签，子工程需要显示的声明才能被继承-->
+<dependencyManagement>
+    <dependencies>
+        <!--
+         <type>pom</type>
+         <scope>import</scope>
+         这两个标签是必须需要声明的，声明之后才能作为父依赖被继承，这是官方文档中的写法
+        -->
+        <!--spring-cloud-alibaba的版本管理-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+            <version>${spring-cloud-alibaba-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <!--springboot的版本管理-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-parent</artifactId>
+            <version>${spring-boot-starter-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <!--spring-cloud的版本管理-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>${spring-cloud-version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+</project>

@@ -1,0 +1,15 @@
+server:
+  port: 8021
+
+#y应用名称 nacos会将该名称当做服务名称
+spring:
+  application:
+    name: stock-service
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        username: nacos
+        password: nacos
+        #命名空间的作用：在服务管理服务列表处体现，可以划分服务的分组
+        namespace: public
